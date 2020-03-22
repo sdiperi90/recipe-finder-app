@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import {
   Form,
   FormGroup,
@@ -7,6 +8,7 @@ import {
   Button
 } from "react-bootstrap";
 import { FlexContainer } from "./elements/Flex";
+import * as actions from "../actions";
 
 class SearchRecipes extends Component {
   constructor(props) {
@@ -20,10 +22,13 @@ class SearchRecipes extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  search = () => {
+  search = async () => {
     let { ingredients, dish } = this.state;
-    const url = `http://www.recipepuppy.com/api/?i=${ingredients}&q=${dish}`;
-    console.log("state", this.state, "url", url);
+    const url = `https://cors-anywhere.herokuapp.com/http://www.recipepuppy.com/api/?i=${ingredients}&q=${dish}`;
+    let response = await fetch(url, { method: "GET" });
+    let recipes = await response.json();
+    console.log("recipes", recipes);
+    this.props.setRecipes(recipes);
   };
 
   handleChange = e => {
@@ -33,7 +38,7 @@ class SearchRecipes extends Component {
     });
   };
   render() {
-    console.log(this.state);
+    console.log("props", this.props);
     return (
       <Form inline>
         <FormGroup>
@@ -58,4 +63,4 @@ class SearchRecipes extends Component {
   }
 }
 
-export default SearchRecipes;
+export default connect(null, actions)(SearchRecipes);
