@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import SearchRecipes from "./SearchRecipes";
 import { FlexContainer } from "./elements/Flex";
 import RecipeList from "./RecipeList";
+import "./../styles/index.css";
 
 class App extends Component {
   render() {
