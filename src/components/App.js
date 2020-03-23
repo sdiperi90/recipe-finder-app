@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import SearchRecipes from "./SearchRecipes";
 import { FlexContainer } from "./elements/Flex";
+import RecipeList from "./RecipeList";
 
 class App extends Component {
   render() {
@@ -13,6 +14,7 @@ class App extends Component {
         >
           <h1>Recipe Finder</h1>
           <SearchRecipes />
+          <RecipeList />
         </FlexContainer>
       </div>
     );

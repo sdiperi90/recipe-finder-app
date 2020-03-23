@@ -28,7 +28,7 @@ class SearchRecipes extends Component {
     let response = await fetch(url, { method: "GET" });
     let recipes = await response.json();
     console.log("recipes", recipes);
-    this.props.setRecipes(recipes);
+    this.props.setRecipes(recipes.results);
   };
 
   handleChange = e => {
