@@ -3,20 +3,30 @@ import * as actions from "../actions/recipes";
 import { connect } from "react-redux";
 
 class RecipeItem extends Component {
+  constructor(props) {
+    super();
+    this.state = {
+      favorited: false
+    };
+  }
+
+  handleFavorite = recipe => {
+    this.props.favoriteRecipe(recipe);
+    this.setState({ favorited: true });
+  };
+
   render() {
-    let { recipe, favoriteRecipe } = this.props;
-    console.log(
-      "favoriteRecipe",
-      favoriteRecipe,
-      recipe.title,
-      recipe.href,
-      recipe.thumbnail
-    );
+    let { recipe, favorite } = this.props;
     return (
       <div className="recipe-item">
-        <div className="star" onClick={e => this.props.favoriteRecipe(recipe)}>
-          &#9734;
-        </div>
+        {!favorite && (
+          <div
+            className={`star ${this.state.favorited && `favorited`}`}
+            onClick={e => this.handleFavorite(recipe)}
+          >
+            &#9734;
+          </div>
+        )}
         <div className="recipe-text">
           <a>
             <h4>{recipe.title}</h4>
